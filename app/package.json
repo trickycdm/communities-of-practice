@@ -2,9 +2,11 @@
   "name": "life-dash",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000/",
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3"
   },
   "scripts": {
@@ -27,11 +29,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "node-sass": "^4.11.0",
-    "@storybook/react": "^4.1.11",
+    "@babel/core": "^7.2.2",
     "@storybook/addon-actions": "^4.1.11",
     "@storybook/addon-links": "^4.1.11",
     "@storybook/addons": "^4.1.11",
-    "@babel/core": "^7.2.2"
+    "@storybook/react": "^4.1.11",
+    "node-sass": "^4.11.0"
   }
 }
