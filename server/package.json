@@ -1,0 +1,61 @@
+{
+  "name": "life-dash-backend",
+  "version": "1.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "A framework for building frontend web projects",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo Mocha tests to be added...",
+    "start": "nodemon app.js",
+    "lint": "eslint --ext=js .",
+    "lint:fix": "eslint --ext=js --fix .",
+    "debug": "node app.js --inspect --debug-brk=5858",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "lint",
+    "test"
+  ],
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.1.0",
+    "dotenv-safe": "^6.1.0",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "moment": "^2.24.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-plugin-node": "^8.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "next"
+        }
+      ],
+      "node/no-missing-require": [
+        "error",
+        {
+          "allowModules": [
+            "log"
+          ]
+        }
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
