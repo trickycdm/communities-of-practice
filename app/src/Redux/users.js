@@ -1,51 +1,39 @@
 const initialState = {
-  createTicket: {
-    subject: null,
-    content: null
-  },
-  resolveTicket: {
-    subject: null,
-    content: null
-  },
-  updateTicket: {
-    subject: null,
-    content: null
-  },
-  activeDropDownOption: null
+  user: null
 }
 
 /*
  * Types
  */
-const UPDATE = 'EmailManagement/UPDATE'
-const SET_ACTIVE_EDITOR = 'EmailManagement/SET_ACTIVE_EDITOR'
+const SET_ACTIVE_USER = 'Users/SET_ACTIVE_USER'
+const REMOVE_ACTIVE_USER = 'Users/REMOVE_ACTIVE_USER'
 
 /*
  * Actions
  */
-export function setActiveDropDownOption (selection) {
-  return { type: SET_ACTIVE_EDITOR, activeDropDownOption: selection }
+export function setActiveUser (user) {
+  return { type: SET_ACTIVE_USER, user }
 }
 
-export function update (email) {
-  return { type: UPDATE, email }
+export function removeActiveUser () {
+  return { type: REMOVE_ACTIVE_USER }
 }
 
 /*
  * Reducer
  */
-export default function EmailManagementReducer (state = initialState, action) {
+export default function UsersReducer (state = initialState, action) {
   switch (action.type) {
-    case UPDATE: {
+    case SET_ACTIVE_USER: {
       return {
         ...state,
-        [action.email.email_id]: { ...action.email }
+        user: { ...action.user }
       }
     }
-    case SET_ACTIVE_EDITOR: {
+    case REMOVE_ACTIVE_USER: {
       return {
         ...state,
-        activeDropDownOption: action.activeDropDownOption
+        user: null
       }
     }
     default:

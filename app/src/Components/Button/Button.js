@@ -1,13 +1,13 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const Button = memo(({ type = 'button', onClick, label = 'no label set...' }) => {
+const Button = ({ id, type = 'button', onClick, label = 'no label set...' }) => {
   return (
     <div className={`rounded-button__container`}>
-      <button className={'rounded-button'} type={type} onClick={onClick}>{label}</button>
+      <button id={id} className={'rounded-button'} type={type} onClick={onClick}>{label}</button>
     </div>
   )
-})
+}
 
 Button.propTypes = {
   label: PropTypes.string,
@@ -15,4 +15,5 @@ Button.propTypes = {
   onClick: PropTypes.func
 }
 
-export default Button
+export { Button }
+export default memo(Button)
