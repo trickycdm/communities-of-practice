@@ -27,12 +27,12 @@ class LoginForm extends Component {
   render () {
     return (
       <div className={'login-form'}>
-        <div className="input-group">
-          <label htmlFor="username">Username</label>
+        <div className='input-group'>
+          <label htmlFor='username'>Username</label>
           <input id={'username'} type={'email'} placeholder={'Some text'} onChange={this.handleUsernameChange} value={this.state.username} ref={this.usernameInputRef} />
         </div>
-        <div className="input-group">
-          <label htmlFor="pw">Password</label>
+        <div className='input-group'>
+          <label htmlFor='pw'>Password</label>
           <input id={'pw'} type={'password'} placeholder={'Password'} onChange={this.handlePwChange} value={this.state.pw} ref={this.pwInputRef} />
         </div>
         <Button type={'submit'} onClick={this.handleSubmit} label={'Submit'} />
@@ -51,7 +51,7 @@ function mapStateToProps (state) {
 // here we're mapping actions to props
 function mapDispatchToProps (dispatch) {
   return {
-    setActiveUser: (username, pw) => dispatch(setActiveUser(username, pw)),
+    setActiveUser: (username, pw) => dispatch(setActiveUser(username, pw))
   }
 }
 

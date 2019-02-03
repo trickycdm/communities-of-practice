@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 class Account extends Component {
   render () {
     return (
-      <div className='account-container'>
-
-      </div>
+      <div className='account-container' />
     )
   }
 }
@@ -19,6 +17,5 @@ function mapStateToProps (state) {
 }
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps
 )(Account)
-

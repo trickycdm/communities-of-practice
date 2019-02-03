@@ -14,8 +14,8 @@ class App extends Component {
       <Router>
         <div className={'main-container'}>
           <Topbar />
-          <Route path="/" exact component={Home} />
-          <Route path="/login/" component={Login} />
+          <Route path='/' exact component={Home} />
+          <Route path='/login/' component={Login} />
           <PrivateRoute path='/private' authenticated={false} component={PrivatePage} />
         </div>
       </Router>
