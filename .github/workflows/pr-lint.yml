@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.16.1]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -38,7 +38,7 @@ jobs:
           npm run lint:fix
 
       # app actions
-      - name: app lint
+      - name: app build
         working-directory: ./app
         run: |
           npm i
