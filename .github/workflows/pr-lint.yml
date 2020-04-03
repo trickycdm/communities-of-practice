@@ -1,0 +1,34 @@
+name: PR lint
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+
+jobs:
+     
+  pr-lint:
+    env:
+      server-dir: './server' 
+    
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      # set up Node.js runner
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # cd into server
+      - name: sever lint
+        working-directory: Then set ${{env.server-dir}} 
+        run: |
+          npm i
+          npm run lint:fix
