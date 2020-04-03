@@ -30,9 +30,18 @@ jobs:
       - name: debug
         run: pwd && ls -la
 
-      # cd into server
+      # server actions
       - name: sever lint
         working-directory: ./server
         run: |
           npm i
           npm run lint:fix
+
+      # app actions
+      - name: sever lint
+        working-directory: ./server
+        run: |
+          npm i
+          npm run format:fix
+          npm run lint:fix
+          npm run build

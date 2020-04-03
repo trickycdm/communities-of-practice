@@ -20,6 +20,7 @@
     "format": "standard",
     "format:fix": "standard --fix",
     "lint": "eslint --ext=js --ext=jsx .",
+    "lint:fix": "eslint --ext=js --ext=jsx --fix .",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
