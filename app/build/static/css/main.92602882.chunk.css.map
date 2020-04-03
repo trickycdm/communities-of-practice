@@ -1,0 +1,1 @@
+{"version":3,"sources":["Button.module.css"],"names":[],"mappings":"AAAA,sBACI,WAAY,CACZ,sBAAuB,CACvB,sBACJ","file":"main.92602882.chunk.css","sourcesContent":[".button {\n    margin: 40px;\n    background-color: green;\n    border: 5px dashed pink;\n}"]}
