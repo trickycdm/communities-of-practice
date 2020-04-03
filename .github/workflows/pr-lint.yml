@@ -8,7 +8,7 @@ jobs:
      
   pr-lint:
     env:
-      server-dir: ./server
+      server-dir: server
     
     runs-on: ubuntu-latest
 
