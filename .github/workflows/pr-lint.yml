@@ -26,6 +26,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      # debug
+      - name: debug
+        run: pwd && ls -la
+
       # cd into server
       - name: sever lint
         working-directory: Then set ${{env.server-dir}} 
