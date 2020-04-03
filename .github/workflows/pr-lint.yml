@@ -38,8 +38,8 @@ jobs:
           npm run lint:fix
 
       # app actions
-      - name: sever lint
-        working-directory: ./server
+      - name: app lint
+        working-directory: ./app
         run: |
           npm i
           npm run format:fix
