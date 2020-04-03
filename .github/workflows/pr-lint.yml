@@ -32,7 +32,7 @@ jobs:
 
       # cd into server
       - name: sever lint
-        working-directory: Then set ${{env.server-dir}} 
+        working-directory: ./server
         run: |
           npm i
           npm run lint:fix
