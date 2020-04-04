@@ -33,14 +33,14 @@ jobs:
 
       - name: Bump package version
         working-directory: ./app
-        run: PACKAGE_VERSION=$(npm version minor)
+        run: ::set-env name={PACKAGE_VERSION}::{$(npm version minor)}
 
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
         with:
-          tag_name: $PACKAGE_VERSION
-          release_name: $PACKAGE_VERSION
+          tag_name: ${{env.PACKAGE_VERSION}}
+          release_name: ${{env.PACKAGE_VERSION}}
           body: |
             Changes in this Release
             - First Change
