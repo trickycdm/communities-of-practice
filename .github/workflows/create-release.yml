@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      PACKAGE_VERSION: 0.0.0
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       CI: true
 
@@ -23,19 +24,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: app build
+      - name: App build
         working-directory: ./app
         run: |
           npm i
           npm run test:coverage
           npm run build
 
-      - name: Create Release
-        id: create_release
-        env:
-          PACKAGE_VERSION
-        uses: actions/create-release@latest
+      - name: Bump package version
         run: PACKAGE_VERSION=npm version minor
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@latest
         with:
           tag_name: $PACKAGE_VERSION
           release_name: $PACKAGE_VERSION
