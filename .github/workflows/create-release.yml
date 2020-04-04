@@ -32,7 +32,8 @@ jobs:
           npm run build
 
       - name: Bump package version
-        run: PACKAGE_VERSION=npm version minor
+        working-directory: ./app
+        run: PACKAGE_VERSION=$(npm version minor)
 
       - name: Create release
         id: create_release
