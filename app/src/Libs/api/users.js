@@ -7,7 +7,7 @@ import { v1Api } from 'Libs/api/api'
  * @returns {Promise<*>}
  */
 export async function authenticateUser (username, pw) {
-  const endpoint = `/api/v1/users/authenticate`
+  const endpoint = '/api/v1/users/authenticate'
   const resp = await v1Api.post(endpoint, { username, pw })
   if (resp.ok) return resp.data
   else {

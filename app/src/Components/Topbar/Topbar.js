@@ -4,7 +4,7 @@ import { Nav } from 'Components/Nav/Nav'
 class Topbar extends Component {
   render () {
     return (
-      <div className={'topbar'}>
+      <div className='topbar'>
         Topbar
         <Nav />
       </div>

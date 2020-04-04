@@ -1,4 +1,4 @@
-name: PR lint
+name: per-merge-checks
 
 on:
   pull_request:
@@ -8,13 +8,15 @@ jobs:
      
   pr-lint:
     env:
-      server-dir: './server' 
+      server-dir: server
+      CI: true
+      SNYK_API_KEY: ${{ secrets.SNYK_API_KEY }}
     
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.16.1]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -26,9 +28,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # cd into server
+      # debug
+      - name: debug
+        run: pwd && ls -la
+
+      # server actions
       - name: sever lint
-        working-directory: Then set ${{env.server-dir}} 
+        working-directory: ./server
         run: |
           npm i
           npm run lint:fix
+
+      # app actions
+      - name: app build
+        working-directory: ./app
+        run: |
+          npm i
+          npm run format:fix
+          npm run test:coverage
+          npm run build
