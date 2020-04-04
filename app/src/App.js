@@ -12,7 +12,7 @@ class App extends Component {
   render () {
     return (
       <Router>
-        <div className={'main-container'}>
+        <div className='main-container'>
           <Topbar />
           <Route path='/' exact component={Home} />
           <Route path='/login/' component={Login} />
