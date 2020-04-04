@@ -5,8 +5,13 @@ on:
     branches: [ master ]
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
+    env:
+      PACKAGE_VERSION: 0.0.0
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      CI: true
 
     strategy:
       matrix:
@@ -19,24 +24,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: app build
+      - name: App build
         working-directory: ./app
-        env:
-          CI: true
         run: |
           npm i
           npm run test:coverage
           npm run build
 
-      - name: Create Release
+      - name: Bump package version
+        run: PACKAGE_VERSION=npm version minor
+
+      - name: Create release
         id: create_release
         uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          CI: true
         with:
-          tag_name: ${{ github.ref }}
-          release_name: r${{ github.ref }}
+          tag_name: $PACKAGE_VERSION
+          release_name: $PACKAGE_VERSION
           body: |
             Changes in this Release
             - First Change

@@ -17,7 +17,8 @@
     "build-storybook": "build-storybook -s public",
     "snyk:test": "snyk test",
     "snyk:wizard": "snyk wizard",
-    "snyk:auth": "snyk auth $apiToken"
+    "snyk:auth": "snyk auth $apiToken",
+    "getPackageVersion": "echo $npm_package_version"
   },
   "dependencies": {
     "apisauce": "^1.1.1",

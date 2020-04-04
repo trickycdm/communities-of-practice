@@ -5,8 +5,8 @@ on:
     types: ['opened', 'edited', 'reopened', 'synchronize']
 
 jobs:
-     
-  pr-lint:
+
+  per-merge-checks:
     env:
       server-dir: server
       CI: true
@@ -28,8 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # debug
-      - name: debug
+      - name: meta info
         run: pwd && ls -la
 
       # server actions
@@ -40,10 +39,9 @@ jobs:
           npm run lint:fix
 
       # app actions
-      - name: app build
+      - name: app checks
         working-directory: ./app
         run: |
           npm i
           npm run format:fix
           npm run test:coverage
-          npm run build
