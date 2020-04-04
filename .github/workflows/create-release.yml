@@ -24,16 +24,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: App build
-        working-directory: ./app
-        run: |
-          npm i
-          npm run test:coverage
-          npm run build
+      
 
       - name: Bump package version
         working-directory: ./app
-        run: ::set-env name={PACKAGE_VERSION}::{$(npm version minor)}
+        run: echo ::set-env name={PACKAGE_VERSION}::{$(npm version minor)}
 
       - name: Create release
         id: create_release
