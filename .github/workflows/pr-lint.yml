@@ -43,6 +43,7 @@ jobs:
         working-directory: ./app
         run: |
           npm i
+          npm run snyk:auth -- apiToken=${{ secrets.SNYK_API_KEY }}
           npm run snyk:test
           npm run format:fix
           npm run test:coverage
