@@ -10,6 +10,7 @@ jobs:
     env:
       server-dir: server
       CI: true
+      SNYK_API_KEY: ${{ secrets.SNYK_API_KEY }}
     
     runs-on: ubuntu-latest
 
@@ -43,7 +44,8 @@ jobs:
         working-directory: ./app
         run: |
           npm i
-          npm run snyk:auth -- apiToken=${{ secrets.SNYK_API_KEY }}
+          echo $SNYK_API_KEY
+          npm run snyk:auth -- apiToken=$SNYK_API_KEY
           npm run snyk:test
           npm run format:fix
           npm run test:coverage
