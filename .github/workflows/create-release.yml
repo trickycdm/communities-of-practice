@@ -33,7 +33,7 @@ jobs:
 
       - name: Bump package version
         working-directory: ./app
-        run: ::set-env name={PACKAGE_VERSION}::{$(npm version minor)}
+        run: echo ::set-env name={PACKAGE_VERSION}::{$(npm version minor)}
 
       - name: Create release
         id: create_release
