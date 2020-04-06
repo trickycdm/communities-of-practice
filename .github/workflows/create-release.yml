@@ -25,10 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # temp fudge this step to test 
+      # temp fudge this step to test
       - name: App build
         working-directory: ./app
-        run: mkdir app/build
+        run: mkdir build
 
       - name: Bump package version
         working-directory: ./app
