@@ -8,10 +8,11 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    # ignore this check if the commit message contains a flag to skip https://github.com/marketplace/actions/skip-based-on-commit-message
+    if: "!contains(github.event.head_commit.message, 'ci(gha)')"
     env:
       PACKAGE_VERSION: 0.0.0
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      CI: true
+      CI: true # stops tests running in watch mode
 
     strategy:
       matrix:
@@ -24,12 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      # temp fudge this step to test 
       - name: App build
         working-directory: ./app
-        run: |
-          npm i
-          npm run test:coverage
-          npm run build
+        run: mkdir app/build
 
       - name: Bump package version
         working-directory: ./app
@@ -51,13 +50,16 @@ jobs:
       # https://github.community/t5/GitHub-Actions/Best-way-to-automate-versioning-publishing-to-GitHub-Package/td-p/31211
       - name: Push version change
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # This token is provided by Actions, you do not need to create your own token
         run: |
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
           git add app/package.json
           git commit -m "ci: version bump ${{env.PACKAGE_VERSION}}"
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" master
+          git push "https://$GITHUB_ACTOR:${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/$GITHUB_REPOSITORY" master
+
+      - name: Create Github Artifact
+        run: echo "todo" #https://github.com/actions/upload-artifact
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master

@@ -9,9 +9,8 @@ jobs:
   per-merge-checks:
     env:
       server-dir: server
-      CI: true
-      SNYK_API_KEY: ${{ secrets.SNYK_API_KEY }}
-    
+      CI: true # stops test running in watch mode
+
     runs-on: ubuntu-latest
 
     strategy:
