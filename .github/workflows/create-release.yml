@@ -9,9 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     # ignore this check if the commit message contains a flag to skip https://github.com/marketplace/actions/skip-based-on-commit-message
-    if: "!contains(github.event.head_commit.message, 'ci(gha)')"
+    if: "!contains(github.event.head_commit.message, 'ci(skip)')"
     env:
       PACKAGE_VERSION: 0.0.0
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token, note adding it here allows all actions that need it to access it.
       CI: true # stops tests running in watch mode
 
     strategy:
@@ -55,7 +56,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
           git add app/package.json
-          git commit -m "ci: version bump ${{env.PACKAGE_VERSION}}"
+          git commit -m "ci(skip): version bump ${{env.PACKAGE_VERSION}}"
           git push "https://$GITHUB_ACTOR:${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/$GITHUB_REPOSITORY" master
 
       - name: Create Github Artifact
