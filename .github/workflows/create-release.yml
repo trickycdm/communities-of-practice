@@ -21,6 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -50,14 +53,12 @@ jobs:
 
       # https://github.community/t5/GitHub-Actions/Best-way-to-automate-versioning-publishing-to-GitHub-Package/td-p/31211
       - name: Push version change
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # This token is provided by Actions, you do not need to create your own token
         run: |
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git config user.name "$GITHUB_ACTOR"
+          git config user.email "trickycdm@users.noreply.github.com"
+          git config user.name "trickycdm"
           git add app/package.json
           git commit -m "ci(skip): version bump ${{env.PACKAGE_VERSION}}"
-          git push "https://$GITHUB_ACTOR:${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/$GITHUB_REPOSITORY" master
+          git push
 
       - name: Create Github Artifact
         run: echo "todo" #https://github.com/actions/upload-artifact
