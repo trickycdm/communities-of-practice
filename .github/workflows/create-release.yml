@@ -63,7 +63,7 @@ jobs:
           git push
 
       - name: Create Github Artifact
-        run: echo "todo ...." #https://github.com/actions/upload-artifact
+        run: echo "todo ." #https://github.com/actions/upload-artifact
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
