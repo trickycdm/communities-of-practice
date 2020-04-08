@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Topbar from 'Components/Topbar/Topbar'
 import PrivateRoute from 'Components/PrivateRoute'
 import Login from 'Views/Login/Login'
+import Homepage from 'Views/Homepage/Homepage'
 import './style.scss'
 
-const Home = () => <h2>Homepage</h2>
 const PrivatePage = () => <h2>Private</h2>
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
       <Router>
         <div className='main-container'>
           <Topbar />
-          <Route path='/' exact component={Home} />
+          <Route path='/' exact component={Homepage} />
           <Route path='/login/' component={Login} />
           <PrivateRoute path='/private' authenticated={false} component={PrivatePage} />
         </div>

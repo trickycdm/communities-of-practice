@@ -40,6 +40,12 @@ jobs:
         working-directory: ./app
         run: echo ::set-env name=PACKAGE_VERSION::$(npm version minor)
 
+      - name: changelog
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
@@ -47,9 +53,7 @@ jobs:
           tag_name: ${{env.PACKAGE_VERSION}}
           release_name: ${{env.PACKAGE_VERSION}}
           body: |
-            Changes in this Release
-            - First Change
-            - Second Change ....
+            ${{ steps.Changelog.outputs.changelog }}
           draft: false
           prerelease: false
 
