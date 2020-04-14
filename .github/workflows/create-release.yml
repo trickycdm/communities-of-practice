@@ -41,9 +41,8 @@ jobs:
         run: echo ::set-env name=PACKAGE_VERSION::$(npm version minor)
 
       - name: Generate Changelog
-        uses: scottbrenner/generate-changelog-action@master
-        working-directory: ./app
         id: Changelog
+        uses: scottbrenner/generate-changelog-action@master
         env:
           REPO: ${{ github.repository }}
 
