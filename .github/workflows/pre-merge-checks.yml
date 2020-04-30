@@ -30,7 +30,7 @@ jobs:
       - name: meta info
         run: pwd && ls -la
 
-      # server actions, todo remove
+      # server actions
       - name: sever lint
         working-directory: ./server
         run: |
