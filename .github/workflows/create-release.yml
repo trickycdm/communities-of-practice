@@ -30,14 +30,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: App build
-        working-directory: ./app
         run: |
           npm i
           npm run test:coverage
           npm run build
 
       - name: Bump package version
-        working-directory: ./app
         run: echo ::set-env name=PACKAGE_VERSION::$(npm version minor)
 
       - name: Generate Changelog
@@ -62,7 +60,7 @@ jobs:
         run: |
           git config user.email "trickycdm@users.noreply.github.com"
           git config user.name "trickycdm"
-          git add app/package.json
+          git add package.json
           git commit -m "ci(skip): version bump ${{env.PACKAGE_VERSION}}"
           git push
 
@@ -78,5 +76,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
           AWS_REGION: "eu-west-2"
-          SOURCE_DIR: "app/build"
+          SOURCE_DIR: "build"
           DEST_DIR: production/${{env.PACKAGE_VERSION}}

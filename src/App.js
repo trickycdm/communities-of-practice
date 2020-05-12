@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Topbar from 'Components/Topbar/Topbar'
-import PrivateRoute from 'Components/PrivateRoute'
-import Login from 'Views/Login/Login'
-import Homepage from 'Views/Homepage/Homepage'
+import Topbar from 'src/Components/Topbar/Topbar'
+import PrivateRoute from 'src/Components/PrivateRoute'
+import Login from 'src/Views/Login/Login'
+import Homepage from 'src/Views/Homepage/Homepage'
 import './style.scss'
 
 const PrivatePage = () => <h2>Private</h2>

@@ -39,7 +39,6 @@ jobs:
 
       # app actions
       - name: app checks
-        working-directory: ./app
         run: |
           npm i
           npm run format:fix
