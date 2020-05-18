@@ -16,12 +16,10 @@ class Communities extends Component {
 
 function mapStateToProps(state) {
   return {
-    communities: state.communities.communities
+    communities: state.communities,
   };
 }
 
-const CommunitiesView = connect(
-  mapStateToProps
-)(Communities);
+const CommunitiesView = connect(mapStateToProps)(Communities);
 
 export { CommunitiesView };

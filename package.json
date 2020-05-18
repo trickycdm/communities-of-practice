@@ -5,14 +5,15 @@
   "proxy": "http://localhost:4000/",
   "scripts": {
     "start": "react-scripts start",
+    "start:stubs": "nodemon stub-server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "format": "standard",
-    "format:fix": "standard --fix",
-    "lint": "eslint --ext=js --ext=jsx app",
-    "lint:fix": "eslint --ext=js --ext=jsx --fix app",
+    "format": "prettier 'src/**/*.js' 'src/**/*.jsx'",
+    "format:fix": "prettier --write 'src/**/*.js' 'src/**/*.jsx'",
+    "lint": "eslint --ext=js --ext=jsx .",
+    "lint:fix": "eslint --ext=js --ext=jsx --fix .",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "snyk:test": "snyk test",
@@ -29,7 +30,8 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -37,17 +39,23 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "babel-loader": "^8.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
+    "express": "^4.17.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.3",
     "node-sass": "^4.13.1",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
     "react-test-renderer": "^16.13.1",
     "snyk": "^1.305.0",
-    "standard": "^14.3.3"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "typescript": "^3.9.2"
   },
   "browserslist": [
     ">0.2%",
@@ -55,16 +63,19 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "it",
-      "jest",
-      "describe",
-      "expect",
-      "fetch"
-    ],
-    "env": [],
-    "ignore": []
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run lint:fix",
+      "npm run format:fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

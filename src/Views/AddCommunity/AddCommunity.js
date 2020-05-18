@@ -6,7 +6,7 @@ class AddCommunity extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className='communities-container'>
+      <div className="communities-container">
         <AddCommunityForm />
       </div>
     );
@@ -16,12 +16,10 @@ class AddCommunity extends Component {
 // gives our component access to state through props.emailManagement
 function mapStateToProps(state) {
   return {
-    communities: state.communities
+    communities: state.communities,
   };
 }
 
-const AddCommunityView = connect(
-  mapStateToProps
-)(AddCommunity);
+const AddCommunityView = connect(mapStateToProps)(AddCommunity);
 
 export { AddCommunityView };

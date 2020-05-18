@@ -1,21 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Account extends Component {
-  render () {
-    return (
-      <div className='account-container' />
-    )
+  render() {
+    return <div className="account-container" />;
   }
 }
 
 // gives our component access to state through props.emailManagement
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    users: state.users
-  }
+    users: state.users,
+  };
 }
 
-export default connect(
-  mapStateToProps
-)(Account)
+export default connect(mapStateToProps)(Account);

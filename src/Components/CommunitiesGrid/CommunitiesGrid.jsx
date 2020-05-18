@@ -3,21 +3,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { CommunityCard } from '../CommunityCard/CommunityCard';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-  }
+  },
 }));
 
 const CommunitiesGrid = ({ communities }) => {
   const classes = useStyles();
+  console.log(communities);
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        {communities.map((community, index) => {
+        {Object.keys(communities).map((community, index) => {
           return (
             <Grid item xs={3} key={`community-${index}`}>
-              <CommunityCard {...community} />
+              <CommunityCard {...communities[community]} />
             </Grid>
           );
         })}

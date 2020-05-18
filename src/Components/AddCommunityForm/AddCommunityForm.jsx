@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCommunity } from 'Redux/communities';
+import { handleNewCommunityApiCall } from 'Redux/communities';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -35,9 +35,9 @@ const AddCommunityForm = () => {
   const [communityName, setCommunityName] = useState('');
   const [communityDesc, setCommunityDesc] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addCommunity({ name: communityName, desc: communityDesc }));
+    dispatch(handleNewCommunityApiCall({ name: communityName, desc: communityDesc }));
   };
 
   return (
@@ -58,7 +58,7 @@ const AddCommunityForm = () => {
                 label="Community Name"
                 name="communityName"
                 autoComplete="communityName"
-                onChange={e => setCommunityName(e.target.value)}
+                onChange={(e) => setCommunityName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,17 +73,11 @@ const AddCommunityForm = () => {
                 multiline
                 rows={4}
                 rowsMax={6}
-                onChange={e => setCommunityDesc(e.target.value)}
+                onChange={(e) => setCommunityDesc(e.target.value)}
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Add Community
           </Button>
         </form>

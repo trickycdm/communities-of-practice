@@ -11,17 +11,17 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='main-container'>
+        <div className="main-container">
           <Topbar />
-          <Route path='/' exact component={Homepage} />
+          <Route path="/" exact component={Homepage} />
 
           <Switch>
-            <Route path='/add-community/' component={AddCommunityView} />
-            <Route path='/communities/' component={CommunitiesView} />
+            <Route path="/add-community/" component={AddCommunityView} />
+            <Route path="/communities/" component={CommunitiesView} />
           </Switch>
 
           <Switch>
-            <Route path='/add-user/' component={NewUserView} />
+            <Route path="/add-user/" component={NewUserView} />
           </Switch>
         </div>
       </Router>

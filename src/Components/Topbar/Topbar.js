@@ -102,13 +102,7 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" className={clsx(classes.menuButton, open && classes.hide)}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
@@ -126,21 +120,17 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
+          <IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
         </div>
         <Divider />
         <List>
-          {
-            navLinks.map(({ label, link }) => (
-              <ListItem button key={label}>
-                <Link to={link}>
-                  <ListItemText primary={label} />
-                </Link>
-              </ListItem>
-            ))
-          }
+          {navLinks.map(({ label, link }) => (
+            <ListItem button key={label}>
+              <Link to={link}>
+                <ListItemText primary={label} />
+              </Link>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
@@ -158,8 +148,7 @@ export default function PersistentDrawerLeft() {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
-      >
-      </main>
+      ></main>
     </div>
   );
 }
