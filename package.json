@@ -21,6 +21,8 @@
     "getPackageVersion": "echo $npm_package_version"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
     "apisauce": "^1.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
