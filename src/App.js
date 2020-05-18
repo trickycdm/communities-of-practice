@@ -1,26 +1,32 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Topbar from 'src/Components/Topbar/Topbar'
-import PrivateRoute from 'src/Components/PrivateRoute'
-import Login from 'src/Views/Login/Login'
-import Homepage from 'src/Views/Homepage/Homepage'
-import './style.scss'
-
-const PrivatePage = () => <h2>Private</h2>
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Topbar from 'Components/Topbar/Topbar';
+import { Homepage } from 'Views/Homepage/Homepage';
+import { AddCommunityView } from 'Views/AddCommunity/AddCommunity';
+import { CommunitiesView } from 'Views/Communities/Communities';
+import { NewUserView } from 'Views/NewUser/NewUser';
+import './style.scss';
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Router>
         <div className='main-container'>
           <Topbar />
           <Route path='/' exact component={Homepage} />
-          <Route path='/login/' component={Login} />
-          <PrivateRoute path='/private' authenticated={false} component={PrivatePage} />
+
+          <Switch>
+            <Route path='/add-community/' component={AddCommunityView} />
+            <Route path='/communities/' component={CommunitiesView} />
+          </Switch>
+
+          <Switch>
+            <Route path='/add-user/' component={NewUserView} />
+          </Switch>
         </div>
       </Router>
-    )
+    );
   }
 }
 
-export default App
+export default App;
