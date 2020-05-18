@@ -1,7 +1,8 @@
 {
   "CREATE_COMMUNITY_ENDPOINT": "/api/v1/createCommunity",
+  "GET_ALL_COMMUNITIES_ENDPOINT": "/api/v1/getAllCommunities",
   "DELETE_COMMUNITY_ENDPOINT": "/api/v1/deleteCommunity",
   "GET_ALL_COMMUNITIES_WITH_USERS_ENDPOINT": "/api/v1/getAllCommunitiesWithUsers",
   "LIST_COMMUNITIES_FOR_USER_ENDPOINT": "/api/v1/listCommunitiesForUser",
-  "UPVOTE_ENDPOINT": "/api/v1/upVote"
+  "SUBSCRIBE_ENDPOINT": "/api/v1/subscribe"
 }

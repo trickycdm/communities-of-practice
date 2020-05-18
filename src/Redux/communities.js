@@ -1,5 +1,5 @@
 import { createCommunity } from 'Api/services/communities/methods/create-community/create-community';
-import { upvoteCommunity } from 'Api/services/communities/methods/upvote-community/upvote-community';
+import { subscribeToCommunity } from 'Api/services/communities/methods/subscribe-to-community/subscribe-to-community';
 import { logError } from '../Utils/log';
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
     id: 'javascript',
     name: 'Javascript',
     desc: 'All things JavaScript, not just limited to React!',
-    votes: 16,
+    subscribers: 16,
   },
   java: {
     id: 'java',
     name: 'Java',
     desc: 'All the cool stuff Java offers!',
-    votes: 23,
+    subscribers: 23,
   },
 };
 
@@ -30,7 +30,7 @@ export const handleNewCommunityApiCall = (community) => {
 
 export const handleNewUpvoteApiCall = (community) => {
   return async (dispatch) => {
-    const resp = await upvoteCommunity(community);
+    const resp = await subscribeToCommunity(community);
     if (resp.error) logError(resp.error);
     dispatch(addUpvoteToState(community));
   };

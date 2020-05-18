@@ -1,7 +1,7 @@
-const { UPVOTE_ENDPOINT } = require('../../endpoints.json');
+const { SUBSCRIBE_ENDPOINT } = require('../../endpoints.json');
 
 module.exports.stubConfig = {
-  route: UPVOTE_ENDPOINT,
+  route: SUBSCRIBE_ENDPOINT,
   method: 'post',
   middleware: (req, res) => res.json(module.exports.stubData),
 };

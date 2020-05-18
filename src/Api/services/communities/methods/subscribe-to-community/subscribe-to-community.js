@@ -1,11 +1,11 @@
 import { initApiConnector } from 'Api/index';
 import { logError } from 'Utils/log';
-import { UPVOTE_ENDPOINT } from '../../endpoints';
+import { SUBSCRIBE_ENDPOINT } from '../../endpoints';
 
-export const upvoteCommunity = async ({ name, user }) => {
+export const subscribeToCommunity = async ({ name, user }) => {
   try {
     const apic = initApiConnector();
-    const resp = await apic.post(UPVOTE_ENDPOINT, { communityName: name, user: { email: 'test@test.com', name: 'Testy Mctestface' } });
+    const resp = await apic.post(SUBSCRIBE_ENDPOINT, { communityName: name, user: { email: 'test@test.com', name: 'Testy Mctestface' } });
     if (resp.ok) return resp.data;
     return { error: resp.problem };
   } catch (err) {

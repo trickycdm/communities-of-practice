@@ -19,10 +19,10 @@ const useStyles = makeStyles({
   },
 });
 
-const CommunityCard = ({ id, name, desc, votes }) => {
+const CommunityCard = ({ id, name, desc, subscribers }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const handleUpvoteClick = () => dispatch(handleNewUpvoteApiCall({ id, name, desc, votes: ++votes }));
+  const handleUpvoteClick = () => dispatch(handleNewUpvoteApiCall({ id, name, desc, subscribers: ++subscribers }));
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -36,9 +36,9 @@ const CommunityCard = ({ id, name, desc, votes }) => {
       </CardContent>
       <CardActions>
         <Button color="secondary" variant="contained" onClick={handleUpvoteClick}>
-          Upvote
+          subscribe
         </Button>
-        <Chip color="primary" icon={<FaceIcon />} label={votes} />
+        <Chip color="primary" icon={<FaceIcon />} label={subscribers} />
       </CardActions>
     </Card>
   );

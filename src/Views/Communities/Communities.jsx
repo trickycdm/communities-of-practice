@@ -1,25 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { CommunitiesGrid } from 'Components/CommunitiesGrid/CommunitiesGrid';
 
-class Communities extends Component {
-  render() {
-    const { communities } = this.props;
-    return (
-      <Container maxWidth="md">
-        <CommunitiesGrid communities={communities} />
-      </Container>
-    );
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    communities: state.communities,
-  };
-}
-
-const CommunitiesView = connect(mapStateToProps)(Communities);
+const CommunitiesView = () => {
+  const { communities } = useSelector(state => (state), shallowEqual);
+  return (
+    <Container maxWidth="md">
+      <CommunitiesGrid communities={communities} />
+    </Container>
+  );
+};
 
 export { CommunitiesView };

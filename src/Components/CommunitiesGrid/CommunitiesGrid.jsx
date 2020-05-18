@@ -17,7 +17,7 @@ const CommunitiesGrid = ({ communities }) => {
       <Grid container spacing={3}>
         {Object.keys(communities).map((community, index) => {
           return (
-            <Grid item xs={3} key={`community-${index}`}>
+            <Grid item xl={3} key={`community-${index}`}>
               <CommunityCard {...communities[community]} />
             </Grid>
           );
