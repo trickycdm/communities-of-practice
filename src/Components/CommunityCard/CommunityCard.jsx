@@ -8,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { handleNewUpvoteApiCall, addUpvoteToState } from '../../Redux/communities';
+import { handleNewSubscribeApiCall, addUpvoteToState } from '../../Redux/communities';
 
 const useStyles = makeStyles({
   root: {
@@ -19,23 +19,23 @@ const useStyles = makeStyles({
   },
 });
 
-const CommunityCard = ({ id, name, desc, subscribers }) => {
+const CommunityCard = ({ id, slug, displayName, desc, subscribers }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const handleUpvoteClick = () => dispatch(handleNewUpvoteApiCall({ id, name, desc, subscribers: ++subscribers }));
+  const handleSubscribeClick = () => dispatch(handleNewSubscribeApiCall({ id, slug, displayName, desc, subscribers: ++subscribers }));
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {name}
+          {displayName}
         </Typography>
         <Typography variant="body2" component="p">
           {desc}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button color="secondary" variant="contained" onClick={handleUpvoteClick}>
+        <Button color="secondary" variant="contained" onClick={handleSubscribeClick}>
           subscribe
         </Button>
         <Chip color="primary" icon={<FaceIcon />} label={subscribers} />

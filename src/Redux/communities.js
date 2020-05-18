@@ -1,24 +1,22 @@
 import { createCommunity } from 'Api/services/communities/methods/create-community/create-community';
+import { getAllCommunities } from '../Api/services/communities/methods/get-all-communities/get-all-communities';
 import { subscribeToCommunity } from 'Api/services/communities/methods/subscribe-to-community/subscribe-to-community';
 import { logError } from '../Utils/log';
 
-const initialState = {
-  javascript: {
-    id: 'javascript',
-    name: 'Javascript',
-    desc: 'All things JavaScript, not just limited to React!',
-    subscribers: 16,
-  },
-  java: {
-    id: 'java',
-    name: 'Java',
-    desc: 'All the cool stuff Java offers!',
-    subscribers: 23,
-  },
-};
+const initialState = {};
 
+const UPDATE_ALL_COMMUNITIES = 'communities/UPDATE_ALL_COMMUNITIES';
 const ADD_COMMUNITY = 'communities/ADD_COMMUNITY';
-const UPVOTE_COMMUNITY = 'communities/UPVOTE_COMMUNITY';
+const SUBSCRIBE_TO_COMMUNITY = 'communities/SUBSCRIBE_TO_COMMUNITY';
+
+export const handleGetAllCommunitiesApiCall = () => {
+  return async dispatch => {
+    const resp = await getAllCommunities();
+    console.log(resp)
+    if (resp.error) return logError(resp.error);
+    dispatch(addAllCommunitiesToState(resp));
+  };
+};
 
 export const handleNewCommunityApiCall = (community) => {
   return async (dispatch) => {
@@ -28,7 +26,7 @@ export const handleNewCommunityApiCall = (community) => {
   };
 };
 
-export const handleNewUpvoteApiCall = (community) => {
+export const handleNewSubscribeApiCall = (community) => {
   return async (dispatch) => {
     const resp = await subscribeToCommunity(community);
     if (resp.error) logError(resp.error);
@@ -40,23 +38,34 @@ export function addCommunityToState(community) {
   return { type: ADD_COMMUNITY, community };
 }
 
+export function addAllCommunitiesToState(communities) {
+  return { type: UPDATE_ALL_COMMUNITIES, communities };
+}
+
 export function addUpvoteToState(community) {
-  return { type: UPVOTE_COMMUNITY, community };
+  return { type: SUBSCRIBE_TO_COMMUNITY, community };
 }
 
 export default function CommunitiesReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, community, communities } = action;
+  console.log(communities)
+  switch (type) {
     case ADD_COMMUNITY: {
       return {
         ...state,
-        [action.community.id]: { ...action.community },
+        [community.slug]: { ...community },
       };
     }
-    case UPVOTE_COMMUNITY: {
-      console.log(action);
+    case UPDATE_ALL_COMMUNITIES: {
       return {
         ...state,
-        [action.community.id]: { ...action.community },
+        ...communities
+      };
+    }
+    case SUBSCRIBE_TO_COMMUNITY: {
+      return {
+        ...state,
+        [community.slug]: { ...community },
       };
     }
     default:

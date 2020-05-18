@@ -12,7 +12,7 @@ module.exports.stubData = [
     slug: 'javascript',
     displayName: 'Javascript',
     desc: 'All things JavaScript, not just limited to React!',
-    subscribers: 16,
+    subscribers: 30,
   },
   {
     id: '12345',

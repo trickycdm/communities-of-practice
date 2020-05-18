@@ -11,7 +11,6 @@ const useStyles = makeStyles(() => ({
 
 const CommunitiesGrid = ({ communities }) => {
   const classes = useStyles();
-  console.log(communities);
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
