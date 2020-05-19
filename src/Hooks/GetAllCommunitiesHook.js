@@ -1,7 +1,7 @@
 import { getAllCommunities } from 'Api/services/communities/methods/get-all-communities/get-all-communities';
 import { useState, useEffect } from 'react'
 
-function getAllCommunitiesHook () {
+const GetAllCommunitiesHook = () => {
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -19,4 +19,4 @@ function getAllCommunitiesHook () {
   return [data, loading, error]
 }
 
-export { getAllCommunitiesHook }
+export { GetAllCommunitiesHook }
