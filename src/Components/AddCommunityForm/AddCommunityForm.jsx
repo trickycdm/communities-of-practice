@@ -37,6 +37,7 @@ const AddCommunityForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // todo add transform for the right data model
     dispatch(handleNewCommunityApiCall({ name: communityName, desc: communityDesc }));
   };
 
