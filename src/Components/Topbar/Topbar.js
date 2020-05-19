@@ -1,31 +1,29 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import clsx from 'clsx'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import { Link } from 'react-router-dom'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const navLinks = [
   { label: 'Home', link: '/' },
-  { label: 'Add User', link: '/add-user' },
+  { label: 'Sign In', link: '/sign-in' },
   { label: 'Add Community', link: '/add-community/' },
   { label: 'Communities', link: '/communities/' },
-];
+]
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,15 +80,15 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-}));
+}))
 
-export default function PersistentDrawerLeft() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+const Topbar = () => {
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
 
-  const handleDrawerOpen = () => setOpen(true);
-  const handleDrawerClose = () => setOpen(false);
+  const handleDrawerOpen = () => setOpen(true)
+  const handleDrawerClose = () => setOpen(false)
 
   return (
     <div className={classes.root}>
@@ -125,30 +123,17 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {navLinks.map(({ label, link }) => (
-            <ListItem button key={label}>
-              <Link to={link}>
+            <Link to={link} key={link}>
+              <ListItem button key={label}>
                 <ListItemText primary={label} />
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Sign out'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      ></main>
+      <main className={clsx(classes.content, { [classes.contentShift]: open, })} />
     </div>
-  );
+  )
 }
+
+export { Topbar }

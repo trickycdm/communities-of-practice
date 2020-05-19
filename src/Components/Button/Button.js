@@ -2,7 +2,6 @@ import styles from './Button.module.css';
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
-console.log(styles);
 const Button = ({ id, type = 'button', onClick, label = 'no label set...' }) => {
   return (
     <div className={styles['button-container']}>

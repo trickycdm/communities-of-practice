@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { handleNewCommunityApiCall } from 'Redux/communities';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useReducer } from 'react'
+import { useDispatch } from 'react-redux'
+import slug from 'slug'
+import { addCommunityToState } from 'Redux/communities'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import { Banner } from 'Components/Banner/Banner'
+import { createCommunity } from 'Api/services/communities/methods/create-community/create-community'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,19 +30,47 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}))
+
+const initialState = {
+  name: '',
+  desc: ''
+}
+
+const reducer = (state, action) => {
+  const { name, value, apiError, apiSuccess } = action
+  return {
+    ...state,
+    [name]: value,
+    apiError,
+    apiSuccess
+  }
+}
 
 const AddCommunityForm = () => {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const [communityName, setCommunityName] = useState('');
-  const [communityDesc, setCommunityDesc] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // todo add transform for the right data model
-    dispatch(handleNewCommunityApiCall({ name: communityName, desc: communityDesc }));
-  };
+  const reduxDispatch = useDispatch()
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  const classes = useStyles()
+
+  const onChange = e => {
+    const { name, value } = e.target
+    dispatch({ name, value })
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const { name, desc } = state
+    const community = { name, desc, slug: slug(name) }
+    const resp = await createCommunity(community)
+    if (resp.error) {
+      dispatch({ apiError: resp.error, apiSuccess: false})
+    } else {
+      dispatch({ apiError: false, apiSuccess: true})
+      reduxDispatch(addCommunityToState(community))
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,11 +86,11 @@ const AddCommunityForm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="communityName"
+                id="name"
                 label="Community Name"
-                name="communityName"
-                autoComplete="communityName"
-                onChange={(e) => setCommunityName(e.target.value)}
+                name="name"
+                autoComplete="false"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -67,24 +98,26 @@ const AddCommunityForm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="communityDesc"
+                name="desc"
                 label="Community Description"
-                id="communityDesc"
-                autoComplete="communityDesc"
+                id="desc"
+                autoComplete="false"
                 multiline
                 rows={4}
                 rowsMax={6}
-                onChange={(e) => setCommunityDesc(e.target.value)}
+                onChange={onChange}
               />
             </Grid>
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Add Community
           </Button>
+          {state.apiError && <Banner message={state.apiError} type='error' />}
+          {state.apiSuccess && <Banner message={'New Community Added!'} type='success' />}
         </form>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export { AddCommunityForm };
+export { AddCommunityForm }

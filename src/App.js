@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Topbar from 'Components/Topbar/Topbar';
-import { Homepage } from 'Views/Homepage/Homepage';
-import { AddCommunityView } from 'Views/AddCommunity/AddCommunity';
-import { CommunitiesView } from 'Views/Communities/Communities';
-import { NewUserView } from 'Views/NewUser/NewUser';
-import './style.scss';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Topbar } from 'Components/Topbar/Topbar'
+import { Homepage } from 'Views/Homepage/Homepage'
+import { AddCommunityView } from 'Views/AddCommunity/AddCommunity'
+import { CommunitiesView } from 'Views/Communities/Communities'
+import { SignInView } from 'Views/SignInView/SignInView'
+import './style.scss'
 
 class App extends Component {
   render() {
@@ -21,12 +21,12 @@ class App extends Component {
           </Switch>
 
           <Switch>
-            <Route path="/add-user/" component={NewUserView} />
+            <Route path="/sign-in/" component={SignInView} />
           </Switch>
         </div>
       </Router>
-    );
+    )
   }
 }
 
-export default App;
+export default App

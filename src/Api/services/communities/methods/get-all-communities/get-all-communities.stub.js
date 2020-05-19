@@ -10,14 +10,14 @@ module.exports.stubData = [
   {
     id: '1234',
     slug: 'javascript',
-    displayName: 'Javascript',
+    name: 'Javascript',
     desc: 'All things JavaScript, not just limited to React!',
     subscribers: 30,
   },
   {
     id: '12345',
     slug: 'java',
-    displayName: 'Java',
+    name: 'Java',
     desc: 'All the cool stuff Java offers!',
     subscribers: 23,
   }

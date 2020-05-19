@@ -21,7 +21,6 @@ class LoginForm extends Component {
     e.preventDefault();
     const resp = await authenticateUser(this.state.username, this.state.pw);
     if (resp) this.props.setActiveUser(resp);
-    console.log(resp);
   };
 
   render() {
