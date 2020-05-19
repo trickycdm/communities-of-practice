@@ -6,7 +6,7 @@ const GetAllCommunitiesHook = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  async function fetchContent () {x
+  async function fetchContent () {
     const resp = await getAllCommunities()
     if (resp.error) return setError(resp.error)
     setData(resp)
