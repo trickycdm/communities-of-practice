@@ -38,6 +38,9 @@ jobs:
       - name: Bump package version
         run: echo ::set-env name=PACKAGE_VERSION::$(npm version minor)
 
+      - name: Set Production ENV Var
+        run: echo ::set-env name=ENV::"production"
+
       - name: Generate Changelog
         id: Changelog
         uses: scottbrenner/generate-changelog-action@master
@@ -45,7 +48,6 @@ jobs:
           REPO: ${{ github.repository }}
 
       - name: Create release
-        run: echo ::set-env name=ENV::"production"
         id: create_release
         uses: actions/create-release@latest
         with:
