@@ -8,7 +8,6 @@ jobs:
 
   per-merge-checks:
     env:
-      server-dir: server
       CI: true # stops test running in watch mode
 
     runs-on: ubuntu-latest
@@ -30,16 +29,10 @@ jobs:
       - name: meta info
         run: pwd && ls -la
 
-      # server actions
-      - name: sever lint
-        working-directory: ./server
-        run: |
-          npm i
-          npm run lint:fix
-
       # app actions
       - name: app checks
         run: |
           npm i
+          npm run lint:fix
           npm run format:fix
           npm run test:coverage

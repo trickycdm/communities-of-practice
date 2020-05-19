@@ -12,4 +12,4 @@ class NewUserView extends Component {
   }
 }
 
-export {NewUserView}
+export { NewUserView };

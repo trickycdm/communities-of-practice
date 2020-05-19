@@ -1,0 +1,4 @@
+*test.js
+/public
+__tests__
+node_modules
