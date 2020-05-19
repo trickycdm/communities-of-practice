@@ -45,6 +45,7 @@ jobs:
           REPO: ${{ github.repository }}
 
       - name: Create release
+        run: echo ::set-env name=ENV::"production"
         id: create_release
         uses: actions/create-release@latest
         with:
