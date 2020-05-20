@@ -29,6 +29,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Inject .env file
+        run : |
+          cat ./.github/env-configs/prod.env >> .env
+
       - name: App build
         run: |
           npm i

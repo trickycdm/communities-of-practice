@@ -11,8 +11,8 @@ const CommunitiesView = () => {
   const [error, toggleError] = useState(false)
 
   const dispatch = useDispatch()
-  const { communities } = useSelector(state => (state), shallowEqual)
-  if (Object.keys(communities).length === 0) {
+  let { communities } = useSelector(state => (state), shallowEqual)
+  if (communities === null) {
     getAllCommunities().then(communities => {
       if (communities.error) {
         toggleLoading(false)
@@ -27,7 +27,7 @@ const CommunitiesView = () => {
 
   return (
     <Container maxWidth="md">
-      {loading && 'Loading...'}
+      {!communities && loading && 'Loading...'}
       {error && <Banner message={error} type='error' />}
       {communities && <CommunitiesGrid communities={communities} />}
     </Container>

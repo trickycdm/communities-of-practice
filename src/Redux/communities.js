@@ -1,4 +1,4 @@
-const initialState = {}
+const initialState = null
 
 const UPDATE_ALL_COMMUNITIES = 'communities/UPDATE_ALL_COMMUNITIES'
 const ADD_COMMUNITY = 'communities/ADD_COMMUNITY'
