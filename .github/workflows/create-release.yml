@@ -32,6 +32,7 @@ jobs:
       - name: Inject .env file
         run : |
           cat ./.github/env-configs/prod.env >> .env
+          echo .env
 
       - name: App build
         run: |
