@@ -3,7 +3,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import Container from '@material-ui/core/Container'
 import { CommunitiesGrid } from 'Components/CommunitiesGrid/CommunitiesGrid'
 import { addAllCommunitiesToState } from 'Redux/communities'
-import { getAllCommunities } from 'Api/services/communities/methods/get-all-communities/get-all-communities'
+import { getAll } from 'Api/services/communities/methods/get-all/get-all'
 import { Banner } from 'Components/Banner/Banner'
 
 const CommunitiesView = () => {
@@ -11,9 +11,9 @@ const CommunitiesView = () => {
   const [error, toggleError] = useState(false)
 
   const dispatch = useDispatch()
-  let { communities } = useSelector(state => (state), shallowEqual)
+  const { communities } = useSelector(state => (state), shallowEqual)
   if (communities === null) {
-    getAllCommunities().then(communities => {
+    getAll().then(communities => {
       if (communities.error) {
         toggleLoading(false)
         toggleError(communities.error)

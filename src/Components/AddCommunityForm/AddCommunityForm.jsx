@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import { Banner } from 'Components/Banner/Banner'
-import { createCommunity } from 'Api/services/communities/methods/create-community/create-community'
+import { create } from 'Api/services/communities/methods/create/create'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,7 +63,7 @@ const AddCommunityForm = () => {
     e.preventDefault()
     const { name, desc } = state
     const community = { name, desc, slug: slug(name) }
-    const resp = await createCommunity(community)
+    const resp = await create(community)
     if (resp.error) {
       dispatch({ apiError: resp.error, apiSuccess: false})
     } else {

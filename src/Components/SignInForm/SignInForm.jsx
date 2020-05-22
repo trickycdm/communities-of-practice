@@ -1,13 +1,16 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import { setActiveUser } from '../../Redux/user'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,10 +30,22 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}))
 
 const SignInForm = () => {
-  const classes = useStyles();
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const history = useHistory();
+
+  const [email, updateEmail] = useState('')
+
+  const onEmailChange = e => updateEmail(e.target.value)
+
+  const signInFormSubmit = () => {
+    window.localStorage.setItem('email', email)
+    dispatch(setActiveUser({ email }))
+    history.push("/communities");
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,10 +57,10 @@ const SignInForm = () => {
         <Typography component="h1" variant="h5">
           Sign In
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={signInFormSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField variant="outlined" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+              <TextField variant="outlined" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={onEmailChange} />
             </Grid>
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
@@ -54,7 +69,7 @@ const SignInForm = () => {
         </form>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export { SignInForm };
+export { SignInForm }

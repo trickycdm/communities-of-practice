@@ -1,4 +1,5 @@
 import React from 'react'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -14,15 +15,15 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { unsetActiveUser } from '../../Redux/user'
 
 const drawerWidth = 240
 
 const navLinks = [
-  { label: 'Home', link: '/' },
-  { label: 'Sign In', link: '/sign-in' },
-  { label: 'Add Community', link: '/add-community/' },
-  { label: 'Communities', link: '/communities/' },
+  { label: 'About', link: '/' },
+  { label: 'Add Community', link: '/add-community/', requiresAuth: true },
+  { label: 'Communities', link: '/communities/', requiresAuth: true },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -83,12 +84,35 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Topbar = () => {
+  const dispatch = useDispatch()
   const classes = useStyles()
+  const history = useHistory()
+
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => setOpen(true)
   const handleDrawerClose = () => setOpen(false)
+
+  const { user } = useSelector(state => (state), shallowEqual)
+
+  const handleSignOut = () => {
+    window.localStorage.setItem('email', '')
+    dispatch(unsetActiveUser())
+    history.push('/sign-in')
+  }
+
+  const navLink = navLink => {
+    const { label, link, requiresAuth } = navLink
+    if (requiresAuth && !user.email) return null
+    return (
+      <Link to={link} key={link}>
+        <ListItem button key={label}>
+          <ListItemText primary={label} />
+        </ListItem>
+      </Link>
+    )
+  }
 
   return (
     <div className={classes.root}>
@@ -122,14 +146,26 @@ const Topbar = () => {
         </div>
         <Divider />
         <List>
-          {navLinks.map(({ label, link }) => (
-            <Link to={link} key={link}>
-              <ListItem button key={label}>
-                <ListItemText primary={label} />
-              </ListItem>
-            </Link>
-          ))}
+          {navLinks.map(link => navLink(link))}
         </List>
+        <Divider />
+        {
+          <List>
+            {
+              user.email
+                ?
+                <ListItem button key={'signout'} onClick={handleSignOut}>
+                  <ListItemText primary={'Sign Out'} />
+                </ListItem>
+                :
+                <Link to={'sign-in'} key={'signin'}>
+                  <ListItem button key={'signin'} onClick={handleSignOut}>
+                    <ListItemText primary={'Sign in'} />
+                  </ListItem>
+                </Link>
+            }
+          </List>
+        }
       </Drawer>
       <main className={clsx(classes.content, { [classes.contentShift]: open, })} />
     </div>

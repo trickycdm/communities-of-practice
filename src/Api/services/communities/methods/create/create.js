@@ -2,7 +2,7 @@ import { initApiConnector } from 'Api/index'
 import { logError } from 'Utils/log'
 import { CREATE_COMMUNITY_ENDPOINT } from '../../endpoints'
 
-export const createCommunity = async ({ slug, name, desc }) => {
+export const create = async ({ slug, name, desc }) => {
   try {
     const paramErrors = checkForCreateCommunityParamErrors({ slug, name, desc })
     if (paramErrors) return paramErrors

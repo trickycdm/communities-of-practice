@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { addCommunityToState } from 'Redux/communities'
-import { subscribeToCommunity } from 'Api/services/communities/methods/subscribe-to-community/subscribe-to-community'
+import { subscribe } from 'Api/services/communities/methods/subscribe/subscribe'
 import { Banner } from 'Components/Banner/Banner'
 
 const useStyles = makeStyles({
@@ -28,10 +28,10 @@ const CommunityCard = ({ slug, name, desc, subscribers }) => {
   const [error, toggleError] = useState(false)
 
   const handleSubscribeClick = async () => {
-    const resp = await subscribeToCommunity({ slug, name, desc })
+    const resp = await subscribe({ slug, name, desc }, {name: 'Jonny5', email: 'jonny@5.com'})
     if (resp.error) toggleError(resp.error)
     else {
-      toggleError(false)
+      toggleError(null)
       dispatch(addCommunityToState({ slug, name, desc, subscribers: ++subscribers }))
     }
   }

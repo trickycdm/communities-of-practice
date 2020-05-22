@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
-import { SignInForm } from 'Components/SignInForm/SignInForm';
+import React from 'react'
+import { SignInForm } from 'Components/SignInForm/SignInForm'
 
-class SignInView extends Component {
-  render() {
-    return (
-      <>
-        <SignInForm />
-      </>
-    );
-  }
-}
+const SignInView = () => <SignInForm />
 
-export { SignInView };
+export { SignInView }
