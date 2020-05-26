@@ -9,8 +9,7 @@ import { checkLocalStorage } from './Utils/local-storage'
 import { setActiveUser } from 'Redux/user'
 import { AuthenticatedRoute } from './Components/AuthenticatedRoute/AuthenticatedRoute'
 import './style.scss'
-
-const { AddCommunityView } = lazy(() => import('Views/AddCommunity/AddCommunity'))
+import { AddCommunityView } from 'Views/AddCommunity/AddCommunity'
 
 const Loader = () => <>Loading&hellip;</>
 
