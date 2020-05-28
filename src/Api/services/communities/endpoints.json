@@ -3,5 +3,6 @@
   "GET_ALL_COMMUNITIES_ENDPOINT": "/api/v1/getAllCommunities",
   "DELETE_COMMUNITY_ENDPOINT": "/api/v1/deleteCommunity",
   "LIST_COMMUNITIES_FOR_USER_ENDPOINT": "/api/v1/listCommunitiesForUser",
-  "SUBSCRIBE_ENDPOINT": "/api/v1/subscribe"
+  "SUBSCRIBE_ENDPOINT": "/api/v1/subscribe",
+  "UNSUBSCRIBE_ENDPOINT": "/api/v1/unsubscribe"
 }

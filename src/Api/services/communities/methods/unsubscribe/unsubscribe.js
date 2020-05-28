@@ -1,11 +1,12 @@
 import { initApiConnector } from 'Api/index'
 import { logError } from 'Utils/log'
-import { SUBSCRIBE_ENDPOINT } from '../../endpoints'
+import { UNSUBSCRIBE_ENDPOINT } from '../../endpoints'
 
-export const subscribe = async (community, user) => {
+export const unsubscribe = async (community, user) => {
   try {
+    user = { email: user.email }
     const apic = initApiConnector()
-    const resp = await apic.post(SUBSCRIBE_ENDPOINT, { community, user })
+    const resp = await apic.post(UNSUBSCRIBE_ENDPOINT, { community, user })
     if (resp.status === 201) return resp.data
     return { error: resp.problem }
   } catch (err) {

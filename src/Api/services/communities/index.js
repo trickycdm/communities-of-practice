@@ -1,3 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-export { getAccountList } from './methods/get-account-list/get-account-list';
-export { getAccountDetails } from './methods/get-account-details/get-account-details';
+export { getAll } from './methods/get-all/get-all';
+export { listCommunitiesForUser } from './methods/list-all-communities-for-user/list-communities-for-user';
+export { unsubscribe } from './methods/unsubscribe/unsubscribe';
+export { subscribe } from './methods/subscribe/subscribe';
