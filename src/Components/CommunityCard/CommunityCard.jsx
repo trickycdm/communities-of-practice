@@ -27,7 +27,7 @@ const CommunityCard = ({ slug, name, desc, users: subscribers }) => {
   const dispatch = useDispatch()
 
   const [error, toggleError] = useState(false)
-  const { user } = useSelector(globalState => (globalState), shallowEqual)
+  const { user, meta } = useSelector(globalState => (globalState), shallowEqual)
   const { email } = user
 
   const handleSubscribeClick = async () => {
@@ -51,6 +51,8 @@ const CommunityCard = ({ slug, name, desc, users: subscribers }) => {
   const subscribeButton = <Button color="primary" variant="contained" onClick={handleSubscribeClick}>subscribe</Button>
   const unsubscribeButton = <Button color="secondary" variant="contained" onClick={handleUnubscribeClick}>unsubscribe</Button>
 
+  const isUserSubscribed = isSubscribed(subscribers, email)
+  if (!meta.showAllCommunities && !isUserSubscribed) return null
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>

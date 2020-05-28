@@ -5,6 +5,7 @@ export const communitiesInitialState = {
   subscriptionsApiLoading: false,
   subscriptionsApiSuccess: false,
   subscriptionsApiError: false,
+  viewAllCommunities: true
 }
 
 export const COMMUNITIES_API_LOADING = 'communities/COMMUNITIES_API_LOADING'

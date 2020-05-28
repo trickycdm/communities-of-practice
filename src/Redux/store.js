@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import user from './user';
 import communities from './communities';
+import meta from './meta';
 
 const reducers = combineReducers({
   user,
   communities,
+  meta
 });
 
 export default createStore(
