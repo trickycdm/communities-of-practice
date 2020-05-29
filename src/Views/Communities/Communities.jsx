@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container'
 import { CommunitiesGrid } from 'Components/CommunitiesGrid/CommunitiesGrid'
 import { addAllCommunitiesToState } from 'Redux/communities'
@@ -9,7 +10,7 @@ import { Banner } from 'Components/Banner/Banner'
 import { communitiesInitialState, communitiesReducer } from './LocalReducer'
 import { COMMUNITIES_API_ERROR, COMMUNITIES_API_LOADING, COMMUNITIES_API_SUCCESS, GENERAL_ERROR } from './LocalReducer'
 import { toggleCommunitiesView } from 'Redux/meta'
-import { CommunityListToggle } from 'Components/CommunityListToggle/CommunityListToggle'
+import { ChipButton } from 'Components/ChipButton/ChipButton'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,11 +50,11 @@ const CommunitiesView = () => {
   return (
     <Container maxWidth="md">
       <div className={classes.root}>
-        <CommunityListToggle label={'All Communities'} active={meta.showAllCommunities} color='secondary' handler={toggleCommunitiesView} />
-        <CommunityListToggle label={'My Subscriptions'} active={!meta.showAllCommunities} color='secondary' handler={toggleCommunitiesView} />
+        <ChipButton label={'All Communities'} active={meta.showAllCommunities} color='secondary' handler={toggleCommunitiesView} />
+        <ChipButton label={'My Subscriptions'} active={!meta.showAllCommunities} color='secondary' handler={toggleCommunitiesView} />
       </div>
       <br/>
-      {communitiesApiLoading && 'Loading...'}
+      {communitiesApiLoading && <CircularProgress color="secondary" />}
       {generalError && <Banner message={'Sorry something went wrong...'} type='error' />}
       {communitiesApiError && <Banner message={communitiesApiError} type='error' />}
       {communities && <CommunitiesGrid communities={communities} />}

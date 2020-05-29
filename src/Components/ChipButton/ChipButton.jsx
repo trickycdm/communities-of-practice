@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
 import { useDispatch } from 'react-redux'
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export const CommunityListToggle = ({ active, label, handler, color }) => {
+export const ChipButton = ({ active, label, handler, color }) => {
   const classes = useStyles()
   const globalDispatch = useDispatch()
 
@@ -24,10 +25,17 @@ export const CommunityListToggle = ({ active, label, handler, color }) => {
       <Chip
         label={label}
         clickable
-        color={color}
+        color={color || 'secondary'}
         variant={active ? 'default' : 'outlined'}
         onClick={onClick}
       />
     </div>
   )
 }
+
+ChipButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  handler: PropTypes.func,
+  color: PropTypes.string,
+};
