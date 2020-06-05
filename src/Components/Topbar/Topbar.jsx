@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  supText: { fontSize: 8 }
 }))
 
 const Topbar = () => {
@@ -129,6 +130,9 @@ const Topbar = () => {
           </IconButton>
           <Typography variant="h6" noWrap>
             Communities of Practice
+          </Typography>
+          <Typography noWrap>
+            <sup className={classes.supText.fontSize}>beta</sup>
           </Typography>
         </Toolbar>
       </AppBar>
