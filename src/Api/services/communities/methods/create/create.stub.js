@@ -4,9 +4,9 @@ module.exports.stubConfig = {
   route: CREATE_COMMUNITY_ENDPOINT,
   method: 'put',
   middleware: (req, res) => {
-    const { name, desc, slug } = req.body
+    const { name, description, slug } = req.body
     console.log(req.body)
-    if (!name || !desc || !slug) return res.sendStatus(500)
+    if (!name || !description || !slug) return res.sendStatus(500)
     return res.sendStatus(201)
   },
 }

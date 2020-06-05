@@ -12,19 +12,17 @@ const useStyles = makeStyles(() => ({
 const CommunitiesGrid = ({ communities }) => {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        {
-          Object.keys(communities).map((community, index) => {
-            return (
-              <Grid item xl={3} key={`community-${index}`}>
-                <CommunityCard {...communities[community]} />
-              </Grid>
-            )
-          })
-        }
-      </Grid>
-    </div>
+    <Grid container className={classes.root} spacing={3}>
+      {
+        Object.keys(communities).map((community, index) => {
+          return (
+            <Grid item xs key={`community-${index}`}>
+              <CommunityCard {...communities[community]} />
+            </Grid>
+          )
+        })
+      }
+    </Grid>
   )
 }
 

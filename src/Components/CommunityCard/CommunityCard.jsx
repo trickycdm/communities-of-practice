@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import { addCommunityToState } from 'Redux/communities'
 import { subscribe, unsubscribe } from 'Api/services/communities'
 import { Banner } from 'Components/Banner/Banner'
-import { removeUserSubscription, isSubscribed } from 'Utils/communityData'
+import { removeUserSubscription, isSubscribed } from 'Utils/community-data'
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 })
 
-const CommunityCard = ({ slug, name, desc, users: subscribers }) => {
+const CommunityCard = ({ slug, name, description, users: subscribers }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -31,20 +31,20 @@ const CommunityCard = ({ slug, name, desc, users: subscribers }) => {
   const { email } = user
 
   const handleSubscribeClick = async () => {
-    const resp = await subscribe({ slug, name, desc }, { name: 'TBC', email })
+    const resp = await subscribe({ slug, name, description }, { name: 'TBC', email })
     if (resp.error) toggleError(resp.error)
     else {
       toggleError(null)
-      dispatch(addCommunityToState({ slug, name, desc, users: [...subscribers, { email, name: 'TBC' }] }))
+      dispatch(addCommunityToState({ slug, name, description, users: [...subscribers, { email, name: 'TBC' }] }))
     }
   }
 
   const handleUnubscribeClick = async () => {
-    const resp = await unsubscribe({ slug, name, desc }, { name: 'TBC', email })
+    const resp = await unsubscribe({ slug, name, description }, { name: 'TBC', email })
     if (resp.error) toggleError(resp.error)
     else {
       toggleError(null)
-      dispatch(addCommunityToState({ slug, name, desc, users: removeUserSubscription(subscribers, email) }))
+      dispatch(addCommunityToState({ slug, name, description, users: removeUserSubscription(subscribers, email) }))
     }
   }
 
@@ -60,7 +60,7 @@ const CommunityCard = ({ slug, name, desc, users: subscribers }) => {
           {name}
         </Typography>
         <Typography variant="body2" component="p">
-          {desc}
+          {description}
         </Typography>
       </CardContent>
       <CardActions>

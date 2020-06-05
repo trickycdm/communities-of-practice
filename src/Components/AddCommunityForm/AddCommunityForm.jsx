@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const initialState = {
   name: '',
-  desc: ''
+  description: ''
 }
 
 const reducer = (state, action) => {
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
 
 const AddCommunityForm = () => {
 
-  const reduxDispatch = useDispatch()
+  const globalDispatch = useDispatch()
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const classes = useStyles()
@@ -61,14 +61,15 @@ const AddCommunityForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const { name, desc } = state
-    const community = { name, desc, slug: slug(name) }
+    const { name, description } = state
+    const community = { name, description, slug: slug(name) }
     const resp = await create(community)
     if (resp.error) {
       dispatch({ apiError: resp.error, apiSuccess: false})
     } else {
       dispatch({ apiError: false, apiSuccess: true})
-      reduxDispatch(addCommunityToState(community))
+      community.users = []
+      globalDispatch(addCommunityToState(community))
     }
   }
 
@@ -98,9 +99,9 @@ const AddCommunityForm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="desc"
+                name="description"
                 label="Community Description"
-                id="desc"
+                id="description"
                 autoComplete="false"
                 multiline
                 rows={4}
