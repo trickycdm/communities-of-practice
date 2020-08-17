@@ -32,7 +32,9 @@ jobs:
       # app actions
       - name: app checks
         run: |
-          npm i
+          npm ci
           npm run lint:fix
           npm run format:fix
           npm run test:coverage
+        env:
+          CYPRESS_INSTALL_BINARY: 0
